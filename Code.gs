@@ -1,138 +1,199 @@
 /**
- * Parcel Doot — Google Sheets API for the GitHub Pages frontend.
- * Replace the existing Apps Script project code with this file, run setup(),
- * then redeploy as a Web app (Execute as: Me; access: Anyone as permitted).
+ * Parcel Doot - Priority Service
+ * Google Apps Script backend
  *
- * Sheets created automatically: Form_Config, Inquiries
- * API calls are POSTed as form-urlencoded "payload" and answered with a
- * postMessage response from the returned HTML iframe. This avoids exposing
- * customer data in query strings and lets the static GitHub Pages site receive
- * an acknowledgement without requiring browser CORS response access.
+ * SETUP:
+ * 1. Create a new Google Apps Script project.
+ * 2. Paste this file into Code.gs and create index.html using the companion file.
+ * 3. Run setupSheets() once from the editor and authorize access.
+ * 4. In Project Settings > Script properties, set ADMIN_PASSWORD to a strong password.
+ * 5. Deploy > New deployment > Web app; Execute as: Me; choose access appropriate for your users.
  */
-const SHEET_CONFIG = 'Form_Config';
-const SHEET_INQUIRIES = 'Inquiries';
-const DEFAULT_ADMIN_PASSWORD = 'change-me-now-2026';
-const DEFAULT_FORM_FIELDS = [
-  {id:'fullName',label:'Full name',type:'text',required:true,placeholder:'Your name',width:'half'},
-  {id:'mobile',label:'Mobile number',type:'tel',required:true,placeholder:'Contact number',width:'half'},
-  {id:'email',label:'Email address',type:'email',required:false,placeholder:'name@example.com',width:'half'},
-  {id:'trackingNumber',label:'Article / tracking number',type:'text',required:false,placeholder:'If available',width:'half'},
-  {id:'serviceType',label:'Type of inquiry',type:'select',required:true,options:['Parcel status','Priority service','Booking / charges','Complaint','Other'],width:'half'},
-  {id:'message',label:'Inquiry details',type:'textarea',required:true,placeholder:'Describe your request',width:'full'}
-];
 
-function setup() {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
-  let cfg = ss.getSheetByName(SHEET_CONFIG);
-  if (!cfg) cfg = ss.insertSheet(SHEET_CONFIG);
-  if (cfg.getLastRow() === 0) {
-    cfg.appendRow(['key','value']);
-    cfg.appendRow(['fields', JSON.stringify(DEFAULT_FORM_FIELDS)]);
-  }
-  let data = ss.getSheetByName(SHEET_INQUIRIES);
-  if (!data) data = ss.insertSheet(SHEET_INQUIRIES);
-  if (data.getLastRow() === 0) data.appendRow(['Submitted At','Reference ID','Full Name','Mobile','Email','Tracking Number','Inquiry Type','Message','All Form Data JSON']);
+const CONFIG_SHEET = 'FormConfig';
+const RESPONSES_SHEET = 'Responses';
+const SPREADSHEET_ID_PROPERTY = 'SPREADSHEET_ID';
+const ADMIN_PASSWORD_PROPERTY = 'ADMIN_PASSWORD';
+
+function doGet() {
+  setupSheetsIfNeeded_();
+  return HtmlService.createHtmlOutputFromFile('index')
+    .setTitle('Parcel Doot - Priority Service')
+    .addMetaTag('viewport', 'width=device-width, initial-scale=1');
+}
+
+/**
+ * Run once manually. Creates a spreadsheet with configuration and response tabs.
+ * If SPREADSHEET_ID is already stored, uses that spreadsheet.
+ */
+function setupSheets() {
   const props = PropertiesService.getScriptProperties();
-  if (!props.getProperty('PARCEL_DOOT_ADMIN_PASSWORD')) props.setProperty('PARCEL_DOOT_ADMIN_PASSWORD', DEFAULT_ADMIN_PASSWORD);
-  Logger.log('Setup complete. Change the default admin password using setAdminPassword().');
-}
+  let ss;
+  const savedId = props.getProperty(SPREADSHEET_ID_PROPERTY);
 
-function doPost(e) {
-  let response;
-  try {
-    const raw = e && e.parameter && e.parameter.payload;
-    if (!raw) throw new Error('Missing request payload.');
-    const body = JSON.parse(raw);
-    response = routeRequest_(body || {});
-  } catch (err) {
-    response = {ok:false,error:String(err && err.message || err)};
+  if (savedId) {
+    ss = SpreadsheetApp.openById(savedId);
+  } else {
+    ss = SpreadsheetApp.create('Parcel Doot - Priority Service Responses');
+    props.setProperty(SPREADSHEET_ID_PROPERTY, ss.getId());
   }
-  return HtmlService.createHtmlOutput(
-    '<!doctype html><html><body><script>parent.postMessage(' +
-    JSON.stringify(Object.assign({parcelDoot:true}, response)).replace(/</g,'\\u003c') +
-    ', "*");</script></body></html>'
-  ).setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
-}
 
-function routeRequest_(body) {
-  switch (String(body.action || '')) {
-    case 'getFormConfig': return {ok:true,fields:getFields_()};
-    case 'submitForm': return saveInquiry_(body.data || {});
-    case 'verifyAdmin': return {ok:true,authorized:verifyPassword_(body.password)};
-    case 'updateConfig':
-      requireAdmin_(body.password);
-      saveFields_(body.fields);
-      return {ok:true};
-    default: throw new Error('Unsupported action.');
+  let config = ss.getSheetByName(CONFIG_SHEET);
+  if (!config) config = ss.insertSheet(CONFIG_SHEET);
+  let responses = ss.getSheetByName(RESPONSES_SHEET);
+  if (!responses) responses = ss.insertSheet(RESPONSES_SHEET);
+
+  if (config.getLastRow() === 0) {
+    const rows = [
+      ['FieldID', 'Section', 'Label', 'Type', 'Required', 'Options', 'Hidden'],
+      ['customer_name', 'Customer Details', 'Name of Customer / Organisation', 'text', true, '', false],
+      ['mobile_number', 'Customer Details', 'Mobile Number', 'text', true, '', false],
+      ['email', 'Customer Details', 'Email Address', 'email', false, '', false],
+      ['booking_type', 'Booking Details', 'Type of Booking', 'select', true, 'Bulk Booking,International Booking,Domestic Parcel,Other', false],
+      ['organisation', 'Booking Details', 'Company / Organisation', 'text', false, '', false],
+      ['monthly_volume', 'Booking Details', 'Approximate Monthly Volume (in pieces)', 'number', false, '', false],
+      ['requirement', 'Booking Details', 'Brief Requirement', 'text', false, '', false]
+    ];
+    config.getRange(1, 1, rows.length, rows[0].length).setValues(rows);
   }
-}
 
-function getFields_() {
-  const sh = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_CONFIG);
-  if (!sh || sh.getLastRow() < 2) return DEFAULT_FORM_FIELDS;
-  const values = sh.getRange(1,1,sh.getLastRow(),2).getValues();
-  for (let i=1;i<values.length;i++) if (values[i][0] === 'fields') {
-    try { const fields=JSON.parse(values[i][1]); if (Array.isArray(fields) && fields.length) return fields; } catch (_) {}
+  if (responses.getLastRow() === 0) {
+    responses.appendRow(['Timestamp', 'Submission ID', 'Form Data JSON']);
   }
-  return DEFAULT_FORM_FIELDS;
-}
 
-function saveFields_(fields) {
-  if (!Array.isArray(fields) || !fields.length || fields.length > 60) throw new Error('Invalid field configuration.');
-  const ids = new Set();
-  fields.forEach(f => {
-    if (!f || !/^[A-Za-z][A-Za-z0-9_-]{0,60}$/.test(String(f.id||''))) throw new Error('Invalid field id.');
-    if (ids.has(f.id)) throw new Error('Field IDs must be unique.');
-    ids.add(f.id);
-    if (!String(f.label||'').trim()) throw new Error('Every field needs a label.');
-    if (!['text','email','tel','number','date','select','textarea'].includes(f.type)) throw new Error('Unsupported field type: '+f.type);
-    if (f.options && (!Array.isArray(f.options) || f.options.length > 100)) throw new Error('Invalid select options.');
+  [config, responses].forEach(sheet => {
+    sheet.setFrozenRows(1);
+    sheet.getRange(1, 1, 1, sheet.getLastColumn())
+      .setFontWeight('bold')
+      .setBackground('#d32f2f')
+      .setFontColor('#ffffff');
+    sheet.autoResizeColumns(1, sheet.getLastColumn());
   });
-  const sh=SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_CONFIG);
-  const values=sh.getRange(1,1,Math.max(sh.getLastRow(),1),2).getValues();
-  let row=values.findIndex((r,i)=>i>0 && r[0]==='fields')+1;
-  if (row < 2) row=sh.getLastRow()+1;
-  sh.getRange(row,1,1,2).setValues([['fields',JSON.stringify(fields)]]);
+
+  if (!props.getProperty(ADMIN_PASSWORD_PROPERTY)) {
+    // Change this immediately in Script Properties after first setup.
+    props.setProperty(ADMIN_PASSWORD_PROPERTY, 'CHANGE_THIS_ADMIN_PASSWORD');
+  }
+
+  return {
+    spreadsheetUrl: ss.getUrl(),
+    message: 'Sheets created/verified. Set ADMIN_PASSWORD in Script Properties before sharing.'
+  };
 }
 
-function saveInquiry_(data) {
-  const fields=getFields_();
-  const safe={};
-  fields.filter(f=>f.visible!==false).forEach(f=>{
-    const value=String(data[f.id] == null ? '' : data[f.id]).trim().slice(0,5000);
-    if (f.required && !value) throw new Error('Please complete: '+f.label);
-    safe[f.id]=value;
+function setupSheetsIfNeeded_() {
+  const props = PropertiesService.getScriptProperties();
+  const id = props.getProperty(SPREADSHEET_ID_PROPERTY);
+  if (!id) {
+    setupSheets();
+    return;
+  }
+  const ss = SpreadsheetApp.openById(id);
+  if (!ss.getSheetByName(CONFIG_SHEET) || !ss.getSheetByName(RESPONSES_SHEET)) {
+    setupSheets();
+  }
+}
+
+function getSpreadsheet_() {
+  setupSheetsIfNeeded_();
+  const id = PropertiesService.getScriptProperties().getProperty(SPREADSHEET_ID_PROPERTY);
+  return SpreadsheetApp.openById(id);
+}
+
+function getFormConfig() {
+  const sheet = getSpreadsheet_().getSheetByName(CONFIG_SHEET);
+  const values = sheet.getDataRange().getValues();
+  if (values.length < 2) return [];
+  const headers = values.shift().map(String);
+  return values.filter(row => row.some(cell => cell !== '')).map(row => {
+    const item = {};
+    headers.forEach((header, i) => item[header] = row[i]);
+    item.Required = item.Required === true || String(item.Required).toLowerCase() === 'true';
+    item.Hidden = item.Hidden === true || String(item.Hidden).toLowerCase() === 'true';
+    item.FieldID = String(item.FieldID || '');
+    item.Section = String(item.Section || 'General');
+    item.Label = String(item.Label || item.FieldID);
+    item.Type = String(item.Type || 'text').toLowerCase();
+    item.Options = String(item.Options || '');
+    return item;
   });
-  const ref='PD-'+Utilities.getUuid().slice(0,8).toUpperCase();
-  const byId={};fields.forEach(f=>byId[f.id]=f);
-  const sh=SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_INQUIRIES);
-  if (!sh) throw new Error('Inquiries sheet is missing. Run setup() in Apps Script.');
-  sh.appendRow([
-    new Date(),ref,
-    safe.fullName||'',safe.mobile||'',safe.email||'',safe.trackingNumber||'',
-    safe.serviceType||'',safe.message||'',JSON.stringify(safe)
-  ]);
-  return {ok:true,reference:ref};
 }
 
-function verifyPassword_(password) {
-  const expected=PropertiesService.getScriptProperties().getProperty('PARCEL_DOOT_ADMIN_PASSWORD') || DEFAULT_ADMIN_PASSWORD;
-  return constantTimeEqual_(String(password||''), expected);
+function submitForm(data) {
+  if (!data || typeof data !== 'object') throw new Error('No form data received.');
+  const config = getFormConfig();
+  const output = {};
+  config.forEach(field => {
+    if (field.Hidden) return;
+    const id = field.FieldID;
+    if (!id) return;
+    let value = data[id];
+    if (value === undefined || value === null) value = '';
+    value = String(value).trim();
+    if (field.Required && !value) {
+      throw new Error('Please complete the required field: ' + field.Label);
+    }
+    // Store only configured fields; ignore unexpected client-supplied keys.
+    output[field.Label] = value;
+  });
+
+  const sheet = getSpreadsheet_().getSheetByName(RESPONSES_SHEET);
+  const submissionId = Utilities.getUuid();
+  sheet.appendRow([new Date(), submissionId, JSON.stringify(output)]);
+  return { success: true, submissionId: submissionId };
 }
-function requireAdmin_(password) {
-  if (!verifyPassword_(password)) throw new Error('Administrator verification failed.');
+
+function verifyAdmin(password) {
+  const saved = PropertiesService.getScriptProperties().getProperty(ADMIN_PASSWORD_PROPERTY);
+  if (!saved || saved === 'CHANGE_THIS_ADMIN_PASSWORD') return false;
+  return constantTimeEquals_(String(password || ''), saved);
 }
-function constantTimeEqual_(a,b) {
+
+function constantTimeEquals_(a, b) {
   if (a.length !== b.length) return false;
-  let out=0;for(let i=0;i<a.length;i++) out|=a.charCodeAt(i)^b.charCodeAt(i);
-  return out===0;
+  let result = 0;
+  for (let i = 0; i < a.length; i++) result |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  return result === 0;
 }
 
-/** Run manually from Apps Script after setup to set a strong unique password. */
-function setAdminPassword() {
-  const password='REPLACE-WITH-A-STRONG-UNIQUE-PASSWORD';
-  if (password === 'REPLACE-WITH-A-STRONG-UNIQUE-PASSWORD' || password.length < 14) {
-    throw new Error('Edit setAdminPassword() with a strong unique password (14+ characters), then run it again.');
-  }
-  PropertiesService.getScriptProperties().setProperty('PARCEL_DOOT_ADMIN_PASSWORD', password);
+function updateConfig(config) {
+  if (!Array.isArray(config)) throw new Error('Invalid form configuration.');
+  const ss = getSpreadsheet_();
+  const sheet = ss.getSheetByName(CONFIG_SHEET);
+  const headers = ['FieldID', 'Section', 'Label', 'Type', 'Required', 'Options', 'Hidden'];
+  const allowedTypes = ['text', 'number', 'email', 'select', 'checkbox'];
+  const rows = [headers];
+  const ids = new Set();
+
+  config.forEach(field => {
+    const id = String(field.FieldID || '').trim();
+    const label = String(field.Label || '').trim();
+    const section = String(field.Section || 'General').trim();
+    const type = String(field.Type || 'text').toLowerCase();
+    if (!id || !label) throw new Error('Every field must have a Field ID and label.');
+    if (!/^[a-zA-Z][a-zA-Z0-9_-]{0,59}$/.test(id)) {
+      throw new Error('Invalid Field ID: ' + id + '. Use letters, numbers, underscore or hyphen; begin with a letter.');
+    }
+    if (ids.has(id)) throw new Error('Duplicate Field ID: ' + id);
+    ids.add(id);
+    if (!allowedTypes.includes(type)) throw new Error('Unsupported field type: ' + type);
+    rows.push([
+      id, section, label, type,
+      field.Required === true || String(field.Required).toLowerCase() === 'true',
+      String(field.Options || ''),
+      field.Hidden === true || String(field.Hidden).toLowerCase() === 'true'
+    ]);
+  });
+
+  sheet.clearContents();
+  sheet.getRange(1, 1, rows.length, headers.length).setValues(rows);
+  sheet.setFrozenRows(1);
+  sheet.getRange(1, 1, 1, headers.length).setFontWeight('bold').setBackground('#d32f2f').setFontColor('#ffffff');
+  sheet.autoResizeColumns(1, headers.length);
+  return 'Form configuration saved successfully.';
+}
+
+/** Utility: open the linked response spreadsheet from the Apps Script editor. */
+function getResponseSpreadsheetUrl() {
+  return getSpreadsheet_().getUrl();
 }
