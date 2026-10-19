@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Parcel Doot — Priority Service</title>
+<meta name="description" content="Parcel Doot priority parcel service inquiry and support portal.">
+<style>
+:root{--navy:#102a43;--blue:#1769aa;--orange:#f59e0b;--bg:#f3f7fb;--ink:#1f2937;--muted:#64748b;--line:#dbe4ee}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink)}
+header{background:linear-gradient(120deg,#102a43,#1769aa);color:white;padding:28px 20px 34px} .head{max-width:1080px;margin:auto;display:flex;align-items:center;gap:16px}
+.logo{width:58px;height:58px;border-radius:16px;background:#fff;color:var(--navy);display:grid;place-items:center;font-size:29px;font-weight:900;box-shadow:0 8px 24px #001b3b40}
+h1{font-size:clamp(25px,4vw,36px);line-height:1.1;margin:0 0 8px}header p{margin:0;color:#e0f2fe}
+main{max-width:1080px;margin:-16px auto 40px;padding:0 16px;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(260px,.65fr);gap:20px}
+.card{background:white;border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:0 10px 28px #102a430d}.card h2{margin:0 0 5px;color:var(--navy);font-size:21px}.sub{margin:0 0 20px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}.field{display:flex;flex-direction:column;gap:6px}.field.full{grid-column:1/-1}label{font-weight:650;font-size:13px;color:#334155}input,select,textarea{width:100%;padding:11px 12px;border:1px solid #cbd5e1;border-radius:10px;font:inherit;background:#fff;color:var(--ink)}input:focus,select:focus,textarea:focus{outline:3px solid #bfdbfe;border-color:var(--blue)}textarea{min-height:100px;resize:vertical}.btn{border:0;border-radius:10px;background:var(--blue);color:white;font-weight:750;padding:12px 18px;cursor:pointer;font:inherit}.btn:hover{filter:brightness(.94)}.btn:disabled{opacity:.55;cursor:wait}.btn.secondary{background:#e8f1fb;color:var(--navy)}.actions{display:flex;gap:10px;align-items:center;margin-top:18px;flex-wrap:wrap}.status{margin-top:14px;padding:11px 13px;border-radius:10px;display:none;overflow-wrap:anywhere}.status.ok{display:block;background:#ecfdf5;color:#166534}.status.err{display:block;background:#fff1f2;color:#9f1239}.info{display:flex;gap:12px;margin:20px 0}.ico{width:38px;height:38px;border-radius:12px;background:#e8f1fb;display:grid;place-items:center;font-size:19px;flex-shrink:0}.info b{display:block;color:var(--navy)}.info span{color:var(--muted);font-size:13px}.tag{display:inline-block;background:#fff7ed;color:#9a3412;padding:5px 10px;border-radius:999px;font-size:12px;font-weight:750;margin-top:15px}
+.admin{margin:20px auto 40px;max-width:1080px;padding:0 16px}.admin details{background:white;border:1px solid var(--line);border-radius:14px;padding:14px 18px}.admin summary{cursor:pointer;color:var(--muted);font-weight:700}.adminpanel{padding-top:16px}.adminpanel textarea{min-height:220px;font-family:ui-monospace,monospace;font-size:12px}.hint{font-size:12px;color:var(--muted)}footer{text-align:center;padding:24px;color:var(--muted);font-size:12px}
+@media(max-width:760px){main{grid-template-columns:1fr;margin-top:-12px}.grid{grid-template-columns:1fr}.field.full{grid-column:auto}.card{padding:19px}.head{align-items:flex-start}}
+</style>
+</head>
+<body>
+<header><div class="head"><div class="logo" aria-hidden="true">PD</div><div><h1>Parcel Doot</h1><p>Priority Service · Parcel inquiries and customer support</p></div></div></header>
+<main>
+<section class="card">
+<h2>Customer Inquiry</h2><p class="sub">Share your details and our team can follow up on your request.</p>
+<form id="inquiryForm"><div id="dynamicFields" class="grid"></div><div class="actions"><button class="btn" id="submitBtn" type="submit">Submit inquiry</button><button class="btn secondary" type="reset">Clear form</button></div></form>
+<div id="formStatus" class="status" role="status" aria-live="polite"></div>
+</section>
+<aside class="card"><h2>Priority Service</h2><p class="sub">A simple way to send your parcel-related request.</p>
+<div class="info"><div class="ico">📦</div><div><b>Parcel inquiries</b><span>Submit a query about a parcel or priority service.</span></div></div>
+<div class="info"><div class="ico">📝</div><div><b>Clear information</b><span>Fill in the fields marked required so your request can be reviewed.</span></div></div>
+<div class="info"><div class="ico">🔒</div><div><b>Responsible handling</b><span>Do not submit passwords, payment-card details, or other sensitive information.</span></div></div>
+<div class="tag">PARCEL DOOT · PRIORITY SERVICE</div>
+</aside>
+</main>
+<section class="admin"><details id="adminDetails"><summary>Administrator tools</summary><div class="adminpanel">
+<div id="adminLogin"><p class="sub">Sign in to manage the customer form fields.</p><div class="field" style="max-width:420px"><label for="adminPassword">Administrator password</label><input id="adminPassword" type="password" autocomplete="current-password"></div><div class="actions"><button class="btn" id="loginBtn" type="button">Sign in</button></div></div>
+<div id="adminEditor" hidden><p class="sub">Edit the field configuration as JSON. Keep each field's id unique. Save publishes the updated form configuration to the connected Google Sheet.</p><label for="configJson">Form field configuration</label><textarea id="configJson" spellcheck="false"></textarea><div class="actions"><button class="btn" id="saveConfigBtn" type="button">Save form configuration</button><button class="btn secondary" id="logoutBtn" type="button">Sign out</button></div></div>
+<div id="adminStatus" class="status" role="status"></div>
+<p class="hint">The administrator password is verified by the Apps Script backend; it is not stored in this page's source.</p>
+</div></details></section>
+<footer>Parcel Doot · Priority Service</footer>
+<iframe name="apiFrame" id="apiFrame" title="Backend response" hidden></iframe>
+<script>
+const API_URL = "https://script.google.com/macros/s/AKfycbxI8REwkuKayyp17zeBRe_lCRLWElMPvfP11miJKERV8RFm2xpCrMYrmyKdta19m3J5KQ/exec";
+const DEFAULT_FIELDS = [
+ {id:"fullName",label:"Full name",type:"text",required:true,placeholder:"Your name",width:"half"},
+ {id:"mobile",label:"Mobile number",type:"tel",required:true,placeholder:"Contact number",width:"half"},
+ {id:"email",label:"Email address",type:"email",required:false,placeholder:"name@example.com",width:"half"},
+ {id:"trackingNumber",label:"Article / tracking number",type:"text",required:false,placeholder:"If available",width:"half"},
+ {id:"serviceType",label:"Type of inquiry",type:"select",required:true,options:["Parcel status","Priority service","Booking / charges","Complaint","Other"],width:"half"},
+ {id:"message",label:"Inquiry details",type:"textarea",required:true,placeholder:"Describe your request",width:"full"}
+];
+let fields = DEFAULT_FIELDS, adminPassword = "";
+const el = id => document.getElementById(id);
+function setStatus(id,msg,ok){const n=el(id);n.textContent=msg;n.className="status "+(ok?"ok":"err")}
+function request(payload){
+ return new Promise((resolve,reject)=>{
+  const frame=el("apiFrame"), targetOrigin=new URL(API_URL).origin;
+  const form=document.createElement("form");form.method="POST";form.action=API_URL;form.target="apiFrame";form.style.display="none";
+  const input=document.createElement("input");input.name="payload";input.value=JSON.stringify(payload);form.appendChild(input);document.body.appendChild(form);
+  let finished=false;
+  const cleanup=()=>{window.removeEventListener("message",onMessage);form.remove();clearTimeout(timer)};
+  const onMessage=event=>{if(event.source!==frame.contentWindow)return;if(event.origin!==targetOrigin&&!event.origin.endsWith(".googleusercontent.com"))return;if(!event.data||event.data.parcelDoot!==true)return;finished=true;cleanup();if(event.data.ok)resolve(event.data);else reject(new Error(event.data.error||"Request failed"))};
+  window.addEventListener("message",onMessage);
+  const timer=setTimeout(()=>{if(!finished){cleanup();reject(new Error("The Google Apps Script did not respond. Confirm that the updated backend is deployed as a Web app."))}},20000);
+  form.submit();
+ });
+}
+function renderFields(){
+ const host=el("dynamicFields");host.innerHTML="";
+ fields.filter(f=>f.visible!==false).forEach(f=>{
+  const wrap=document.createElement("div");wrap.className="field "+(f.width==="full"||f.type==="textarea"?"full":"");
+  const label=document.createElement("label");label.htmlFor="f_"+f.id;label.textContent=f.label+(f.required?" *":"");wrap.appendChild(label);
+  let input;
+  if(f.type==="select"){input=document.createElement("select");const empty=document.createElement("option");empty.value="";empty.textContent="Choose an option";input.appendChild(empty);(f.options||[]).forEach(v=>{const o=document.createElement("option");o.value=v;o.textContent=v;input.appendChild(o)})}
+  else if(f.type==="textarea"){input=document.createElement("textarea");input.placeholder=f.placeholder||""}
+  else{input=document.createElement("input");input.type=["text","email","tel","number","date"].includes(f.type)?f.type:"text";input.placeholder=f.placeholder||""}
+  input.id="f_"+f.id;input.name=f.id;input.required=!!f.required;wrap.appendChild(input);host.appendChild(wrap);
+ });
+}
+async function loadConfig(){try{const r=await request({action:"getFormConfig"});if(Array.isArray(r.fields)&&r.fields.length)fields=r.fields;renderFields()}catch(e){renderFields();console.warn("Using default form configuration:",e.message)}}
+el("inquiryForm").addEventListener("submit",async e=>{
+ e.preventDefault();const btn=el("submitBtn");btn.disabled=true;btn.textContent="Submitting…";
+ const data={};fields.filter(f=>f.visible!==false).forEach(f=>{const n=el("f_"+f.id);if(n)data[f.id]=n.value.trim()});
+ try{await request({action:"submitForm",data});setStatus("formStatus","Your inquiry has been submitted successfully.",true);el("inquiryForm").reset()}
+ catch(err){setStatus("formStatus","Submission failed: "+err.message,false)}
+ finally{btn.disabled=false;btn.textContent="Submit inquiry"}
+});
+el("loginBtn").addEventListener("click",async()=>{
+ const p=el("adminPassword").value;if(!p){setStatus("adminStatus","Enter the administrator password.",false);return}
+ el("loginBtn").disabled=true;
+ try{const r=await request({action:"verifyAdmin",password:p});if(!r.authorized)throw new Error("Administrator verification failed.");adminPassword=p;const c=await request({action:"getFormConfig"});fields=c.fields||DEFAULT_FIELDS;el("configJson").value=JSON.stringify(fields,null,2);el("adminLogin").hidden=true;el("adminEditor").hidden=false;setStatus("adminStatus","Signed in. You can now edit the form configuration.",true);renderFields()}
+ catch(e){setStatus("adminStatus",e.message,false)}finally{el("loginBtn").disabled=false}
+});
+el("saveConfigBtn").addEventListener("click",async()=>{
+ let parsed;try{parsed=JSON.parse(el("configJson").value);if(!Array.isArray(parsed)||!parsed.length)throw new Error("Configuration must be a non-empty JSON array.");const ids=parsed.map(x=>x.id);if(ids.some(x=>!x)||new Set(ids).size!==ids.length)throw new Error("Each field must have a unique id.");parsed.forEach(f=>{if(!f.label||!f.type)throw new Error("Each field needs a label and type.")})}catch(e){setStatus("adminStatus","Invalid configuration: "+e.message,false);return}
+ el("saveConfigBtn").disabled=true;
+ try{await request({action:"updateConfig",password:adminPassword,fields:parsed});fields=parsed;renderFields();setStatus("adminStatus","Form configuration saved to Google Sheets.",true)}
+ catch(e){setStatus("adminStatus","Could not save configuration: "+e.message,false)}
+ finally{el("saveConfigBtn").disabled=false}
+});
+el("logoutBtn").addEventListener("click",()=>{adminPassword="";el("adminPassword").value="";el("adminLogin").hidden=false;el("adminEditor").hidden=true;setStatus("adminStatus","Signed out.",true)});
+loadConfig();
+</script>
+</body></html>
