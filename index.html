@@ -1,33 +1,394 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
-<script nonce="ZDscxz1bZw32cPvjj1eQOw">window['ppConfig'] = {productName: '26981ed0d57bbad37e728ff58134270c', deleteIsEnforced:  false , sealIsEnforced:  false , heartbeatRate:  0.5 , periodicReportingRateMillis:  60000.0 , disableAllReporting:  false };(function(){'use strict';function k(a){var b=0;return function(){return b<a.length?{done:!1,value:a[b++]}:{done:!0}}}function l(a){var b=typeof Symbol!="undefined"&&Symbol.iterator&&a[Symbol.iterator];if(b)return b.call(a);if(typeof a.length=="number")return{next:k(a)};throw Error(String(a)+" is not an iterable or ArrayLike");}function m(a,b){var c;b&&!b.done&&(c=a["return"])&&c.call(a)}
-var n=typeof Object.defineProperties=="function"?Object.defineProperty:function(a,b,c){if(a==Array.prototype||a==Object.prototype)return a;a[b]=c.value;return a};function p(a){a=["object"==typeof globalThis&&globalThis,a,"object"==typeof window&&window,"object"==typeof self&&self,"object"==typeof global&&global];for(var b=0;b<a.length;++b){var c=a[b];if(c&&c.Math==Math)return c}throw Error("Cannot find global object");}var q=p(this);
-function r(a,b){if(b)a:{var c=q;a=a.split(".");for(var d=0;d<a.length-1;d++){var e=a[d];if(!(e in c))break a;c=c[e]}a=a[a.length-1];d=c[a];b=b(d);b!=d&&b!=null&&n(c,a,{configurable:!0,writable:!0,value:b})}}r("Object.is",function(a){return a?a:function(b,c){return b===c?b!==0||1/b===1/c:b!==b&&c!==c}});
-r("Array.prototype.includes",function(a){return a?a:function(b,c){var d=this;d instanceof String&&(d=String(d));var e=d.length;c=c||0;for(c<0&&(c=Math.max(c+e,0));c<e;c++){var f=d[c];if(f===b||Object.is(f,b))return!0}return!1}});
-r("String.prototype.includes",function(a){return a?a:function(b,c){if(this==null)throw new TypeError("The 'this' value for String.prototype.includes must not be null or undefined");if(b instanceof RegExp)throw new TypeError("First argument to String.prototype.includes must not be a regular expression");return this.indexOf(b,c||0)!==-1}});function t(a,b,c){a("https://csp.withgoogle.com/csp/proto/"+encodeURIComponent(b),JSON.stringify(c))}function u(){var a;if((a=window.ppConfig)==null?0:a.disableAllReporting)return function(){};var b,c,d,e;return(e=(b=window)==null?void 0:(c=b.navigator)==null?void 0:(d=c.sendBeacon)==null?void 0:d.bind(navigator))!=null?e:v}function v(a,b){var c=new XMLHttpRequest;c.open("POST",a);c.send(b)}
-function w(){var a=(x=Object.prototype)==null?void 0:x.__lookupGetter__("__proto__"),b=y,c=z;return function(){var d=a.call(this),e,f,g,h;t(c,b,{type:"ACCESS_GET",origin:(f=window.location.origin)!=null?f:"unknown",report:{className:(g=d==null?void 0:(e=d.constructor)==null?void 0:e.name)!=null?g:"unknown",stackTrace:(h=Error().stack)!=null?h:"unknown"}});return d}}
-function A(){var a=(B=Object.prototype)==null?void 0:B.__lookupSetter__("__proto__"),b=y,c=z;return function(d){d=a.call(this,d);var e,f,g,h;t(c,b,{type:"ACCESS_SET",origin:(f=window.location.origin)!=null?f:"unknown",report:{className:(g=d==null?void 0:(e=d.constructor)==null?void 0:e.name)!=null?g:"unknown",stackTrace:(h=Error().stack)!=null?h:"unknown"}});return d}}function C(a,b){D(a.productName,b);setInterval(function(){D(a.productName,b)},a.periodicReportingRateMillis)}
-var E="constructor __defineGetter__ __defineSetter__ hasOwnProperty __lookupGetter__ __lookupSetter__ isPrototypeOf propertyIsEnumerable toString valueOf __proto__ toLocaleString x_ngfn_x".split(" "),F=E.concat,G=navigator.userAgent.match(/Firefox\/([0-9]+)\./),H=(!G||G.length<2?0:Number(G[1])<75)?["toSource"]:[],I;if(H instanceof Array)I=H;else{for(var J=l(H),K,L=[];!(K=J.next()).done;)L.push(K.value);I=L}var M=F.call(E,I),N=[];
-function D(a,b){var c=[],d=l(Object.getOwnPropertyNames(Object.prototype)),e=d.next();try{for(;!e.done;e=d.next()){var f=e.value;M.includes(f)||N.includes(f)||c.push(f)}}finally{m(d,e)}e=Object.prototype;d=[];for(f=0;f<c.length;f++){var g=c[f];d[f]={name:g,descriptor:Object.getOwnPropertyDescriptor(Object.prototype,g),type:typeof e[g]}}if(d.length!==0){c=l(d);e=c.next();try{for(;!e.done;e=c.next())N.push(e.value.name)}finally{m(c,e)}var h;t(b,a,{type:"SEAL",origin:(h=window.location.origin)!=null?
-h:"unknown",report:{blockers:d}})}};var O=Math.random(),P=u(),Q=window.ppConfig;Q&&(Q.disableAllReporting||Q.deleteIsEnforced&&Q.sealIsEnforced||O<Q.heartbeatRate&&t(P,Q.productName,{origin:window.location.origin,type:"HEARTBEAT"}));var z=u(),R=window.ppConfig;if(R)if(R.deleteIsEnforced)delete Object.prototype.__proto__;else if(!R.disableAllReporting){var y=R.productName;try{var x,B;Object.defineProperty(Object.prototype,"__proto__",{enumerable:!1,get:w(),set:A()})}catch(a){}}
-(function(){var a=u(),b=window.ppConfig;b&&(b.sealIsEnforced?Object.seal(Object.prototype):b.disableAllReporting||(document.readyState!=="loading"?C(b,a):document.addEventListener("DOMContentLoaded",function(){C(b,a)})))})();}).call(this);
-</script><meta name="chromevox" content-script="no">
-<title>Parcel Doot - Priority Service</title>
-<meta name="viewport"content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" nonce="_5eXN5XY_tSk1N6wNh4BRw"><link rel="stylesheet" href="/static/macros/client/css/2208734863-mae_html_css_ltr.css">
-<script type="text/javascript" src="/static/macros/client/js/472645793-warden_bin_i18n_warden__en_gb.js" nonce="ZDscxz1bZw32cPvjj1eQOw"></script>
+  <base target="_top">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:#f4f5f7; padding:15px; color:#333; margin:0; }
+    .container { max-width:650px; margin:0 auto; background:#fff; padding:25px; border-radius:8px; box-shadow:0 4px 6px rgba(0,0,0,.1); border-top:6px solid #d32f2f; }
+    .admin-container { max-width:1000px; }
+    h2 { color:#d32f2f; text-align:center; margin:0 0 5px; }
+    .subtitle { text-align:center; color:#666; font-size:14px; margin-bottom:25px; }
+    .section-card { border:1px solid #e0e0e0; border-radius:6px; padding:15px; margin-bottom:20px; background:#fafafa; }
+    .section-title { font-size:16px; font-weight:bold; color:#d32f2f; margin-bottom:15px; border-bottom:2px solid #ffebee; padding-bottom:5px; }
+    .form-group { margin-bottom:15px; }
+    label { display:block; font-weight:600; margin-bottom:5px; font-size:14px; }
+    input[type=text], input[type=email], input[type=number], input[type=password], select { width:100%; padding:10px; border:1px solid #ccc; border-radius:4px; font-size:14px; background:#fff; }
+    input[type=checkbox] { width:auto; }
+    .checkbox-group { display:flex; align-items:flex-start; gap:10px; }
+    .checkbox-group input { margin-top:4px; }
+    button { background:#d32f2f; color:white; padding:12px 15px; border:0; border-radius:4px; cursor:pointer; width:100%; font-size:16px; font-weight:bold; margin-top:10px; }
+    button:hover { background:#b71c1c; } button:disabled { opacity:.65; cursor:wait; }
+    .btn-small { padding:7px 10px; font-size:12px; width:auto; background:#555; }
+    .btn-delete { background:#dc3545; }
+    .admin-link { display:block; text-align:center; margin-top:20px; font-size:12px; color:#777; cursor:pointer; text-decoration:underline; }
+    .hidden { display:none !important; }
+    table { width:100%; border-collapse:collapse; margin-top:10px; font-size:13px; }
+    th,td { border:1px solid #ddd; padding:8px; text-align:left; }
+    th { background:#f2f2f2; }
+    .add-field-box { background:#e3f2fd; padding:15px; border-radius:6px; margin-bottom:20px; border:1px solid #bbdefb; }
+    .add-field-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; margin-bottom:10px; }
+    .status { margin-top:12px; text-align:center; font-size:14px; }
+    .error { color:#b71c1c; } .success { color:#16803c; }
+    .table-wrap { overflow-x:auto; }
+    .admin-help { font-size:13px; color:#555; margin:8px 0 14px; line-height:1.45; }
+    .admin-table input[type=text], .admin-table select { padding:7px; min-width:100px; }
+    .admin-table .field-id { min-width:130px; }
+    .admin-table .field-label { min-width:180px; }
+    .admin-table .field-section { min-width:150px; }
+    .admin-table .field-options { min-width:180px; }
+    .order-controls { display:flex; gap:4px; }
+    .order-controls button { margin:0; padding:6px 8px; width:auto; }
+    .admin-table .btn-delete { margin:0; }
+    @media(max-width:650px) { .container { padding:16px; } .add-field-grid { grid-template-columns:1fr; } table { min-width:1000px; } }
+  </style>
 </head>
 <body>
-<table id="warning-bar-table" class="full_size" cellspacing="0" cellpadding="0"><tr><td><div id="warning" class="warning-bar"></div></td></tr><tr><td style="height: 100%"><iframe id="sandboxFrame" title="Parcel Doot - Priority Service" allow="accelerometer *; autoplay *; clipboard-read *; clipboard-write *; encrypted-media *; fullscreen *; geolocation *; gyroscope *; local-network-access *; magnetometer *; midi *; payment *; picture-in-picture *; screen-wake-lock *; sync-xhr *; web-share *" sandbox="allow-downloads allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation allow-storage-access-by-user-activation">
-</iframe>
-</td></tr></table><script nonce="ZDscxz1bZw32cPvjj1eQOw">
-(function() {
-var el = document.getElementById('sandboxFrame');
-el.onload = function() {
-goog.script.init("\x7b\x22functionNames\x22:\x5b\x22doGet\x22,\x22setup\x22,\x22setAdminPassword\x22,\x22getFormConfig\x22,\x22submitForm\x22,\x22verifyAdmin\x22,\x22updateConfig\x22,\x22getDatabaseUrl\x22\x5d,\x22sandboxMode\x22:\x22IFRAME_SANDBOX\x22,\x22callbackTimeout\x22:390000,\x22deploymentId\x22:\x22AKfycbxI8REwkuKayyp17zeBRe_lCRLWElMPvfP11miJKERV8RFm2xpCrMYrmyKdta19m3J5KQ\x22,\x22eei\x22:\x22\x22,\x22sandboxHost\x22:\x22https:\/\/n-bat2lslt53ospdu72zxblnabtcwprfppubhpugy-0lu-script.googleusercontent.com\x22,\x22clientSideProperties\x22:\x7b\x22google.script.sandbox.mode\x22:\x22IFRAME_SANDBOX\x22,\x22google.script.use_fetch_for_post_form\x22:true,\x22google.script.host.origin\x22:\x22https:\/\/docs.google.com\x22\x7d,\x22actionPrefix\x22:\x22\/macros\/s\/AKfycbxI8REwkuKayyp17zeBRe_lCRLWElMPvfP11miJKERV8RFm2xpCrMYrmyKdta19m3J5KQ\x22,\x22userHtml\x22:\x22\x3c!DOCTYPE html\x3e\\n\x3chtml\x3e\\n\x3chead\x3e\\n  \x3cstyle\x3e\\n    body \x7b font-family: \x27Segoe UI\x27, Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f5f7; padding: 15px; color: #333; \x7d\\n    .container \x7b max-width: 650px; margin: 0 auto; background: white; padding: 25px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-top: 6px solid #d32f2f; \x7d\\n    .admin-container \x7b max-width: 1000px; \x7d\\n    h2 \x7b color: #d32f2f; text-align: center; margin-bottom: 5px; \x7d\\n    .subtitle \x7b text-align: center; color: #666; font-size: 14px; margin-bottom: 25px; \x7d\\n    .section-card \x7b border: 1px solid #e0e0e0; border-radius: 6px; padding: 15px; margin-bottom: 20px; background: #fafafa; \x7d\\n    .section-title \x7b font-size: 16px; font-weight: bold; color: #d32f2f; margin-bottom: 15px; border-bottom: 2px solid #ffebee; padding-bottom: 5px; \x7d\\n    .form-group \x7b margin-bottom: 15px; \x7d\\n    label \x7b display: block; font-weight: 600; margin-bottom: 5px; font-size: 14px; \x7d\\n    input\x5btype\x3d\\\x22text\\\x22\x5d, input\x5btype\x3d\\\x22email\\\x22\x5d, input\x5btype\x3d\\\x22number\\\x22\x5d, select \x7b width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; font-size: 14px; \x7d\\n    .checkbox-group \x7b display: flex; align-items: flex-start; gap: 10px; \x7d\\n    .checkbox-group input \x7b width: auto; margin-top: 4px; \x7d\\n    button \x7b background-color: #d32f2f; color: white; padding: 12px 15px; border: none; border-radius: 4px; cursor: pointer; width: 100%; font-size: 16px; font-weight: bold; margin-top: 10px;\x7d\\n    button:hover \x7b background-color: #b71c1c; \x7d\\n    .btn-small \x7b padding: 5px 10px; font-size: 12px; width: auto; background-color: #555; \x7d\\n    .btn-delete \x7b background-color: #dc3545; \x7d\\n    .admin-link \x7b display: block; text-align: center; margin-top: 20px; font-size: 12px; color: #888; cursor: pointer; text-decoration: underline; \x7d\\n    .hidden \x7b display: none; \x7d\\n    table \x7b width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 13px;\x7d\\n    th, td \x7b border: 1px solid #ddd; padding: 8px; text-align: left; \x7d\\n    th \x7b background-color: #f2f2f2; \x7d\\n    .admin-controls input\x5btype\x3d\\\x22text\\\x22\x5d \x7b padding: 5px; width: 90%; \x7d\\n    .add-field-box \x7b background: #e3f2fd; padding: 15px; border-radius: 6px; margin-bottom: 20px; border: 1px solid #bbdefb; \x7d\\n    .add-field-grid \x7b display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 10px; \x7d\\n  \x3c\\\/style\x3e\\n\x3c\\\/head\x3e\\n\x3cbody\x3e\\n\\n\\n\x3cdiv class\x3d\\\x22container\\\x22 id\x3d\\\x22customer-view\\\x22\x3e\\n  \x3ch2\x3eParcel Doot - Priority Service\x3c\\\/h2\x3e\\n  \x3cdiv class\x3d\\\x22subtitle\\\x22\x3eSkip the queue for Bulk \x26 International Bookings\x3c\\\/div\x3e\\n  \x3cform id\x3d\\\x22dynamic-form\\\x22 onsubmit\x3d\\\x22submitForm(event)\\\x22\x3e\\n    \x3cdiv id\x3d\\\x22form-fields\\\x22\x3eLoading form...\x3c\\\/div\x3e\\n    \x3cbutton type\x3d\\\x22submit\\\x22 id\x3d\\\x22submit-btn\\\x22\x3eSubmit \x26 Get Priority Service\x3c\\\/button\x3e\\n  \x3c\\\/form\x3e\\n  \x3cdiv id\x3d\\\x22success-message\\\x22 class\x3d\\\x22hidden\\\x22 style\x3d\\\x22text-align:center; padding: 30px 10px;\\\x22\x3e\\n    \x3ch3 style\x3d\\\x22color: green;\\\x22\x3eInquiry Submitted Successfully!\x3c\\\/h3\x3e\\n    \x3cp\x3ePlease approach the counter directly for priority handling.\x3c\\\/p\x3e\\n  \x3c\\\/div\x3e\\n  \x3cspan class\x3d\\\x22admin-link\\\x22 onclick\x3d\\\x22showAdminLogin()\\\x22\x3eAdmin Login\x3c\\\/span\x3e\\n\x3c\\\/div\x3e\\n\\n\\n\x3cdiv class\x3d\\\x22container hidden\\\x22 id\x3d\\\x22admin-login-view\\\x22\x3e\\n  \x3ch2\x3eAdmin Login\x3c\\\/h2\x3e\\n  \x3cdiv class\x3d\\\x22form-group\\\x22\x3e\\n    \x3clabel\x3ePassword\x3c\\\/label\x3e\\n    \x3cinput type\x3d\\\x22password\\\x22 id\x3d\\\x22admin-pass\\\x22\x3e\\n  \x3c\\\/div\x3e\\n  \x3cbutton onclick\x3d\\\x22loginAdmin()\\\x22\x3eLogin\x3c\\\/button\x3e\\n  \x3cspan class\x3d\\\x22admin-link\\\x22 onclick\x3d\\\x22cancelAdmin()\\\x22\x3eBack to Form\x3c\\\/span\x3e\\n\x3c\\\/div\x3e\\n\\n\\n\x3cdiv class\x3d\\\x22container admin-container hidden\\\x22 id\x3d\\\x22admin-dashboard-view\\\x22\x3e\\n  \x3ch2\x3eForm Manager (Admin)\x3c\\\/h2\x3e\\n  \\n  \x3cdiv class\x3d\\\x22add-field-box\\\x22\x3e\\n    \x3ch4 style\x3d\\\x22margin-top:0; color:#1565c0;\\\x22\x3e+ Add New Field\x3c\\\/h4\x3e\\n    \x3cdiv class\x3d\\\x22add-field-grid\\\x22\x3e\\n      \x3cinput type\x3d\\\x22text\\\x22 id\x3d\\\x22new_section\\\x22 placeholder\x3d\\\x22Section Name (e.g. Section 1: Info)\\\x22\x3e\\n      \x3cinput type\x3d\\\x22text\\\x22 id\x3d\\\x22new_id\\\x22 placeholder\x3d\\\x22Field ID (no spaces, e.g. aadhar_no)\\\x22\x3e\\n      \x3cinput type\x3d\\\x22text\\\x22 id\x3d\\\x22new_label\\\x22 placeholder\x3d\\\x22Display Label (e.g. Aadhar Number)\\\x22\x3e\\n      \x3cselect id\x3d\\\x22new_type\\\x22\x3e\\n        \x3coption value\x3d\\\x22text\\\x22\x3eText\x3c\\\/option\x3e\\n        \x3coption value\x3d\\\x22number\\\x22\x3eNumber\x3c\\\/option\x3e\\n        \x3coption value\x3d\\\x22email\\\x22\x3eEmail\x3c\\\/option\x3e\\n        \x3coption value\x3d\\\x22select\\\x22\x3eDropdown (Select)\x3c\\\/option\x3e\\n        \x3coption value\x3d\\\x22checkbox\\\x22\x3eCheckbox\x3c\\\/option\x3e\\n      \x3c\\\/select\x3e\\n      \x3cinput type\x3d\\\x22text\\\x22 id\x3d\\\x22new_options\\\x22 placeholder\x3d\\\x22Options (comma separated, if select)\\\x22\x3e\\n      \x3clabel\x3e\x3cinput type\x3d\\\x22checkbox\\\x22 id\x3d\\\x22new_required\\\x22\x3e Compulsory Field?\x3c\\\/label\x3e\\n    \x3c\\\/div\x3e\\n    \x3cbutton type\x3d\\\x22button\\\x22 class\x3d\\\x22btn-small\\\x22 style\x3d\\\x22background-color: #1976d2;\\\x22 onclick\x3d\\\x22addField()\\\x22\x3eAdd Field\x3c\\\/button\x3e\\n  \x3c\\\/div\x3e\\n\\n  \x3ctable id\x3d\\\x22admin-table\\\x22\x3e\\n    \x3cthead\x3e\\n      \x3ctr\x3e\\n        \x3cth\x3eSection\x3c\\\/th\x3e\\n        \x3cth\x3eField ID\x3c\\\/th\x3e\\n        \x3cth\x3eDisplay Label\x3c\\\/th\x3e\\n        \x3cth\x3eType\x3c\\\/th\x3e\\n        \x3cth\x3eCompulsory?\x3c\\\/th\x3e\\n        \x3cth\x3eHide?\x3c\\\/th\x3e\\n        \x3cth\x3eAction\x3c\\\/th\x3e\\n      \x3c\\\/tr\x3e\\n    \x3c\\\/thead\x3e\\n    \x3ctbody id\x3d\\\x22admin-table-body\\\x22\x3e\x3c\\\/tbody\x3e\\n  \x3c\\\/table\x3e\\n  \\n  \x3cbutton onclick\x3d\\\x22saveAdminChanges()\\\x22 style\x3d\\\x22margin-top:20px;\\\x22\x3eSave All Changes to Database\x3c\\\/button\x3e\\n  \x3cspan class\x3d\\\x22admin-link\\\x22 onclick\x3d\\\x22cancelAdmin()\\\x22\x3eLogout\x3c\\\/span\x3e\\n\x3c\\\/div\x3e\\n\\n\x3cscript\x3e\\n  let formConfig \x3d \x5b\x5d;\\n\\n  google.script.run.withSuccessHandler(renderForm).getFormConfig();\\n\\n  function renderForm(config) \x7b\\n    formConfig \x3d config;\\n    const formDiv \x3d document.getElementById(\x27form-fields\x27);\\n    formDiv.innerHTML \x3d \x27\x27;\\n    \\n    const sections \x3d \x7b\x7d;\\n    config.forEach(field \x3d\x3e \x7b\\n      if(field.Hidden \x3d\x3d\x3d true || field.Hidden \x3d\x3d\x3d \x27true\x27) return;\\n      if(!sections\x5bfield.Section\x5d) sections\x5bfield.Section\x5d \x3d \x5b\x5d;\\n      sections\x5bfield.Section\x5d.push(field);\\n    \x7d);\\n\\n    for (const \x5bsectionName, fields\x5d of Object.entries(sections)) \x7b\\n      let sectionHtml \x3d `\x3cdiv class\x3d\\\x22section-card\\\x22\x3e\x3cdiv class\x3d\\\x22section-title\\\x22\x3e$\x7bsectionName\x7d\x3c\\\/div\x3e`;\\n      \\n      fields.forEach(field \x3d\x3e \x7b\\n        let isReq \x3d (field.Required \x3d\x3d\x3d true || field.Required \x3d\x3d\x3d \x27true\x27);\\n        if(field.Type \x3d\x3d\x3d \x27checkbox\x27) \x7b\\n          sectionHtml +\x3d `\x3cdiv class\x3d\\\x22form-group checkbox-group\\\x22\x3e\\n            \x3cinput type\x3d\\\x22checkbox\\\x22 name\x3d\\\x22$\x7bfield.FieldID\x7d\\\x22 id\x3d\\\x22$\x7bfield.FieldID\x7d\\\x22 $\x7bisReq ? \x27required\x27 : \x27\x27\x7d value\x3d\\\x22Yes\\\x22\x3e\\n            \x3clabel for\x3d\\\x22$\x7bfield.FieldID\x7d\\\x22\x3e$\x7bfield.Label\x7d $\x7bisReq ? \x27\x3cspan style\x3d\\\x22color:red\\\x22\x3e*\x3c\\\/span\x3e\x27 : \x27\x27\x7d\x3c\\\/label\x3e\\n          \x3c\\\/div\x3e`;\\n        \x7d else \x7b\\n          sectionHtml +\x3d `\x3cdiv class\x3d\\\x22form-group\\\x22\x3e\x3clabel\x3e$\x7bfield.Label\x7d $\x7bisReq ? \x27\x3cspan style\x3d\\\x22color:red\\\x22\x3e*\x3c\\\/span\x3e\x27 : \x27\x27\x7d\x3c\\\/label\x3e`;\\n          if(field.Type \x3d\x3d\x3d \x27select\x27) \x7b\\n            const options \x3d field.Options ? field.Options.toString().split(\x27,\x27).map(o \x3d\x3e o.trim()) : \x5b\x5d;\\n            sectionHtml +\x3d `\x3cselect name\x3d\\\x22$\x7bfield.FieldID\x7d\\\x22 $\x7bisReq ? \x27required\x27 : \x27\x27\x7d\x3e\x3coption value\x3d\\\x22\\\x22\x3eSelect an option\x3c\\\/option\x3e`;\\n            options.forEach(opt \x3d\x3e sectionHtml +\x3d `\x3coption value\x3d\\\x22$\x7bopt\x7d\\\x22\x3e$\x7bopt\x7d\x3c\\\/option\x3e`);\\n            sectionHtml +\x3d `\x3c\\\/select\x3e`;\\n          \x7d else \x7b\\n            sectionHtml +\x3d `\x3cinput type\x3d\\\x22$\x7bfield.Type\x7d\\\x22 name\x3d\\\x22$\x7bfield.FieldID\x7d\\\x22 $\x7bisReq ? \x27required\x27 : \x27\x27\x7d\x3e`;\\n          \x7d\\n          sectionHtml +\x3d `\x3c\\\/div\x3e`;\\n        \x7d\\n      \x7d);\\n      sectionHtml +\x3d `\x3c\\\/div\x3e`;\\n      formDiv.innerHTML +\x3d sectionHtml;\\n    \x7d\\n  \x7d\\n\\n  function submitForm(e) \x7b\\n    e.preventDefault();\\n    document.getElementById(\x27submit-btn\x27).innerText \x3d \\\x22Submitting...\\\x22;\\n    document.getElementById(\x27submit-btn\x27).disabled \x3d true;\\n    \\n    const formElements \x3d document.getElementById(\x27dynamic-form\x27).elements;\\n    let data \x3d \x7b\x7d;\\n    for (let i \x3d 0; i \x3c formElements.length; i++) \x7b\\n      if (formElements\x5bi\x5d.name) \x7b\\n        data\x5bformElements\x5bi\x5d.name\x5d \x3d formElements\x5bi\x5d.type \x3d\x3d\x3d \x27checkbox\x27 ? (formElements\x5bi\x5d.checked ? \x27Yes\x27 : \x27No\x27) : formElements\x5bi\x5d.value;\\n      \x7d\\n    \x7d\\n    \\n    google.script.run.withSuccessHandler(() \x3d\x3e \x7b\\n      document.getElementById(\x27dynamic-form\x27).classList.add(\x27hidden\x27);\\n      document.getElementById(\x27success-message\x27).classList.remove(\x27hidden\x27);\\n    \x7d).submitForm(data);\\n  \x7d\\n\\n  \/\/ Admin Navigation\\n  function showAdminLogin() \x7b\\n    document.getElementById(\x27customer-view\x27).classList.add(\x27hidden\x27);\\n    document.getElementById(\x27admin-login-view\x27).classList.remove(\x27hidden\x27);\\n  \x7d\\n\\n  function cancelAdmin() \x7b\\n    document.getElementById(\x27admin-dashboard-view\x27).classList.add(\x27hidden\x27);\\n    document.getElementById(\x27admin-login-view\x27).classList.add(\x27hidden\x27);\\n    document.getElementById(\x27customer-view\x27).classList.remove(\x27hidden\x27);\\n    google.script.run.withSuccessHandler(renderForm).getFormConfig();\\n  \x7d\\n\\n  function loginAdmin() \x7b\\n    const pass \x3d document.getElementById(\x27admin-pass\x27).value;\\n    google.script.run.withSuccessHandler(result \x3d\x3e \x7b\\n      if(result) \x7b\\n        document.getElementById(\x27admin-login-view\x27).classList.add(\x27hidden\x27);\\n        document.getElementById(\x27admin-dashboard-view\x27).classList.remove(\x27hidden\x27);\\n        document.getElementById(\x27admin-pass\x27).value \x3d \x27\x27;\\n        renderAdminTable();\\n      \x7d else \x7b alert(\\\x22Incorrect Password!\\\x22); \x7d\\n    \x7d).verifyAdmin(pass);\\n  \x7d\\n\\n  \\n  function renderAdminTable() \x7b\\n    const tbody \x3d document.getElementById(\x27admin-table-body\x27);\\n    tbody.innerHTML \x3d \x27\x27;\\n    formConfig.forEach((field, index) \x3d\x3e \x7b\\n      const isHidden \x3d (field.Hidden \x3d\x3d\x3d true || field.Hidden \x3d\x3d\x3d \x27true\x27);\\n      const isReq \x3d (field.Required \x3d\x3d\x3d true || field.Required \x3d\x3d\x3d \x27true\x27);\\n      tbody.innerHTML +\x3d `\\n        \x3ctr\x3e\\n          \x3ctd\x3e$\x7bfield.Section\x7d\x3c\\\/td\x3e\\n          \x3ctd\x3e$\x7bfield.FieldID\x7d\x3c\\\/td\x3e\\n          \x3ctd\x3e\x3cinput type\x3d\\\x22text\\\x22 id\x3d\\\x22label_$\x7bindex\x7d\\\x22 value\x3d\\\x22$\x7bfield.Label\x7d\\\x22 style\x3d\\\x22width:100%; padding:4px;\\\x22\x3e\x3c\\\/td\x3e\\n          \x3ctd\x3e$\x7bfield.Type\x7d\x3c\\\/td\x3e\\n          \x3ctd style\x3d\\\x22text-align:center\\\x22\x3e\x3cinput type\x3d\\\x22checkbox\\\x22 id\x3d\\\x22req_$\x7bindex\x7d\\\x22 $\x7bisReq ? \x27checked\x27 : \x27\x27\x7d\x3e\x3c\\\/td\x3e\\n          \x3ctd style\x3d\\\x22text-align:center\\\x22\x3e\x3cinput type\x3d\\\x22checkbox\\\x22 id\x3d\\\x22hidden_$\x7bindex\x7d\\\x22 $\x7bisHidden ? \x27checked\x27 : \x27\x27\x7d\x3e\x3c\\\/td\x3e\\n          \x3ctd\x3e\x3cbutton class\x3d\\\x22btn-small btn-delete\\\x22 onclick\x3d\\\x22deleteField($\x7bindex\x7d)\\\x22\x3eDelete\x3c\\\/button\x3e\x3c\\\/td\x3e\\n        \x3c\\\/tr\x3e\\n      `;\\n    \x7d);\\n  \x7d\\n\\n  \/\/ Add New Field\\n  function addField() \x7b\\n    const section \x3d document.getElementById(\x27new_section\x27).value || \x27New Section\x27;\\n    let id \x3d document.getElementById(\x27new_id\x27).value.trim().toLowerCase().replace(\/\\\\s+\/g, \x27_\x27);\\n    const label \x3d document.getElementById(\x27new_label\x27).value;\\n    const type \x3d document.getElementById(\x27new_type\x27).value;\\n    const options \x3d document.getElementById(\x27new_options\x27).value;\\n    const isReq \x3d document.getElementById(\x27new_required\x27).checked;\\n\\n    if(!id || !label) \x7b\\n      alert(\\\x22Field ID and Display Label are mandatory!\\\x22);\\n      return;\\n    \x7d\\n\\n    formConfig.push(\x7b\\n      FieldID: id,\\n      Section: section,\\n      Label: label,\\n      Type: type,\\n      Required: isReq,\\n      Options: options,\\n      Hidden: false\\n    \x7d);\\n\\n    document.getElementById(\x27new_id\x27).value \x3d \x27\x27;\\n    document.getElementById(\x27new_label\x27).value \x3d \x27\x27;\\n    document.getElementById(\x27new_options\x27).value \x3d \x27\x27;\\n    \\n    renderAdminTable();\\n  \x7d\\n\\n  \\n  function deleteField(index) \x7b\\n    if(confirm(\\\x22Are you sure you want to delete this field?\\\x22)) \x7b\\n      formConfig.splice(index, 1);\\n      renderAdminTable();\\n    \x7d\\n  \x7d\\n\\n  \\n  function saveAdminChanges() \x7b\\n    \\n    formConfig.forEach((field, index) \x3d\x3e \x7b\\n      if(document.getElementById(`label_$\x7bindex\x7d`)) \x7b\\n        field.Label \x3d document.getElementById(`label_$\x7bindex\x7d`).value;\\n        field.Required \x3d document.getElementById(`req_$\x7bindex\x7d`).checked;\\n        field.Hidden \x3d document.getElementById(`hidden_$\x7bindex\x7d`).checked;\\n      \x7d\\n    \x7d);\\n    \\n    const btn \x3d document.querySelector(\x27#admin-dashboard-view button\x5bonclick\x3d\\\x22saveAdminChanges()\\\x22\x5d\x27);\\n    btn.innerText \x3d \\\x22Saving to Google Sheets...\\\x22;\\n    \\n    google.script.run.withSuccessHandler(msg \x3d\x3e \x7b\\n      alert(msg);\\n      btn.innerText \x3d \\\x22Save All Changes to Database\\\x22;\\n      renderAdminTable();\\n    \x7d).updateConfig(formConfig);\\n  \x7d\\n\x3c\\\/script\x3e\\n\x3c\\\/body\x3e\\n\x3c\\\/html\x3e\x22,\x22ncc\x22:\x22\x7b\\\x22awhs\\\x22:true\x7d\x22\x7d", "AEDoMFjSGfwpRMjzQShOMt04TaVA:1792392153514", undefined, true , true  , "true", "https:\/\/n-bat2lslt53ospdu72zxblnabtcwprfppubhpugy-0lu-script.googleusercontent.com", "https:\/\/drive.google.com\/abuse?id\x3dAFS7AduoAoWVWk7tO-MAnTh7VhuXUI3uq8-PZ0f0Sb4nFK2ZNh34lsi49HWThlVhcidF8hsPEdPXscpj7ID5q-wClIUgAk-YANM6AfR7%3A0\x26docurl\x3dhttps%3A%2F%2Fscript.google.com%2Fmacros%2Fs%2FAKfycbxI8REwkuKayyp17zeBRe_lCRLWElMPvfP11miJKERV8RFm2xpCrMYrmyKdta19m3J5KQ%2Fexec");}
-el.src = 'https:\/\/n-bat2lslt53ospdu72zxblnabtcwprfppubhpugy-0lu-script.googleusercontent.com\/userCodeAppPanel?createOAuthDialog\x3dtrue';
-}());
+  <div class="container" id="customer-view">
+    <h2>Parcel Doot - Priority Service</h2>
+    <div class="subtitle">Skip the queue for Bulk &amp; International Bookings</div>
+    <form id="dynamic-form">
+      <div id="form-fields">Loading form...</div>
+      <button type="submit" id="submit-btn">Submit &amp; Get Priority Service</button>
+    </form>
+    <div id="success-message" class="hidden" style="text-align:center;padding:30px 10px;">
+      <h3 style="color:green;">Inquiry Submitted Successfully!</h3>
+      <p>Please approach the counter directly for priority handling.</p>
+      <p id="submission-reference" style="font-size:12px;color:#666;"></p>
+    </div>
+    <div id="customer-status" class="status" role="status"></div>
+    <span class="admin-link" id="admin-link">Admin Login</span>
+  </div>
+
+  <div class="container hidden" id="admin-login-view">
+    <h2>Admin Login</h2>
+    <div class="form-group">
+      <label for="admin-pass">Password</label>
+      <input type="password" id="admin-pass" autocomplete="current-password">
+    </div>
+    <button type="button" id="login-btn">Login</button>
+    <div id="login-status" class="status error"></div>
+    <span class="admin-link" id="back-login">Back to Form</span>
+  </div>
+
+  <div class="container admin-container hidden" id="admin-dashboard-view">
+    <h2>Form Manager (Admin)</h2>
+    <div class="add-field-box">
+      <h4 style="margin-top:0;color:#1565c0;">+ Add New Field</h4>
+      <div class="add-field-grid">
+        <input type="text" id="new_section" placeholder="Section Name (e.g. Customer Details)">
+        <input type="text" id="new_id" placeholder="Field ID (e.g. gst_number)">
+        <input type="text" id="new_label" placeholder="Display Label (e.g. GST Number)">
+        <select id="new_type">
+          <option value="text">Text</option><option value="number">Number</option>
+          <option value="email">Email</option><option value="select">Dropdown (Select)</option>
+          <option value="checkbox">Checkbox</option>
+        </select>
+        <input type="text" id="new_options" placeholder="Options (comma separated, for dropdown)">
+        <label style="display:flex;align-items:center;gap:8px;"><input type="checkbox" id="new_required"> Compulsory Field?</label>
+      </div>
+      <button type="button" class="btn-small" style="background:#1976d2;" id="add-field-btn">Add Field</button>
+    </div>
+    <p class="admin-help">Edit existing fields directly in the table. Use ↑ / ↓ to change the display sequence. Add fields above or delete fields you no longer need. Changes appear on the customer form after you click <b>Save All Changes to Database</b>.</p>
+    <div class="table-wrap">
+      <table id="admin-table" class="admin-table">
+        <thead><tr><th>Order</th><th>Section</th><th>Field ID</th><th>Display Label</th><th>Type</th><th>Dropdown Options</th><th>Compulsory?</th><th>Hide?</th><th>Action</th></tr></thead>
+        <tbody id="admin-table-body"></tbody>
+      </table>
+    </div>
+    <button type="button" id="save-btn" style="margin-top:20px;">Save All Changes to Database</button>
+    <div id="admin-status" class="status" role="status"></div>
+    <span class="admin-link" id="logout-link">Logout</span>
+  </div>
+
+<script>
+  let formConfig = [];
+  const $ = id => document.getElementById(id);
+  const truthy = value => value === true || String(value).toLowerCase() === 'true';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    $('dynamic-form').addEventListener('submit', submitForm);
+    $('admin-link').addEventListener('click', showAdminLogin);
+    $('back-login').addEventListener('click', cancelAdmin);
+    $('logout-link').addEventListener('click', cancelAdmin);
+    $('login-btn').addEventListener('click', loginAdmin);
+    $('add-field-btn').addEventListener('click', addField);
+    $('save-btn').addEventListener('click', saveAdminChanges);
+    $('admin-pass').addEventListener('keydown', e => { if (e.key === 'Enter') loginAdmin(); });
+    google.script.run.withSuccessHandler(renderForm).withFailureHandler(showLoadError).getFormConfig();
+  });
+
+  function showLoadError(err) {
+    $('form-fields').textContent = 'Unable to load the form. Please refresh or contact the administrator.';
+    $('customer-status').textContent = err && err.message ? err.message : 'Loading failed.';
+    $('customer-status').className = 'status error';
+  }
+
+  // Escapes data coming from Google Sheets before inserting it into HTML.
+  function esc(value) {
+    return String(value == null ? '' : value).replace(/[&<>"']/g, ch => ({
+      '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'
+    }[ch]));
+  }
+
+  function renderForm(config) {
+    formConfig = Array.isArray(config) ? config : [];
+    const formDiv = $('form-fields');
+    formDiv.innerHTML = '';
+    const sections = {};
+    formConfig.forEach(field => {
+      if (truthy(field.Hidden)) return;
+      const section = field.Section || 'General';
+      if (!sections[section]) sections[section] = [];
+      sections[section].push(field);
+    });
+    Object.keys(sections).forEach(sectionName => {
+      const card = document.createElement('div');
+      card.className = 'section-card';
+      const title = document.createElement('div');
+      title.className = 'section-title';
+      title.textContent = sectionName;
+      card.appendChild(title);
+      sections[sectionName].forEach(field => {
+        const group = document.createElement('div');
+        group.className = 'form-group';
+        const id = String(field.FieldID || '');
+        const labelText = String(field.Label || id);
+        const required = truthy(field.Required);
+        if (field.Type === 'checkbox') {
+          group.className += ' checkbox-group';
+          const input = document.createElement('input');
+          input.type = 'checkbox'; input.name = id; input.id = id; input.value = 'Yes';
+          if (required) input.required = true;
+          const label = document.createElement('label');
+          label.htmlFor = id; label.textContent = labelText + (required ? ' *' : '');
+          group.append(input, label);
+        } else {
+          const label = document.createElement('label');
+          label.htmlFor = id; label.textContent = labelText + (required ? ' *' : '');
+          let input;
+          if (field.Type === 'select') {
+            input = document.createElement('select');
+            const placeholder = document.createElement('option');
+            placeholder.value = ''; placeholder.textContent = 'Select an option'; input.appendChild(placeholder);
+            String(field.Options || '').split(',').map(s => s.trim()).filter(Boolean).forEach(opt => {
+              const option = document.createElement('option'); option.value = opt; option.textContent = opt; input.appendChild(option);
+            });
+          } else {
+            input = document.createElement('input');
+            input.type = ['text','number','email'].includes(field.Type) ? field.Type : 'text';
+          }
+          input.name = id; input.id = id;
+          if (required) input.required = true;
+          group.append(label, input);
+        }
+        card.appendChild(group);
+      });
+      formDiv.appendChild(card);
+    });
+    if (!Object.keys(sections).length) formDiv.textContent = 'No fields have been configured. Please contact the administrator.';
+  }
+
+  function submitForm(event) {
+    event.preventDefault();
+    const form = $('dynamic-form');
+    if (!form.reportValidity()) return;
+    const button = $('submit-btn');
+    button.disabled = true; button.textContent = 'Submitting...';
+    $('customer-status').textContent = '';
+    const data = {};
+    Array.from(form.elements).forEach(el => {
+      if (el.name) data[el.name] = el.type === 'checkbox' ? (el.checked ? 'Yes' : 'No') : el.value;
+    });
+    google.script.run
+      .withSuccessHandler(result => {
+        form.classList.add('hidden');
+        $('success-message').classList.remove('hidden');
+        $('submission-reference').textContent = result && result.submissionId ? 'Reference: ' + result.submissionId : '';
+        $('customer-status').textContent = '';
+      })
+      .withFailureHandler(err => {
+        $('customer-status').textContent = err && err.message ? err.message : 'Submission failed. Please try again.';
+        $('customer-status').className = 'status error';
+        button.disabled = false; button.textContent = 'Submit & Get Priority Service';
+      })
+      .submitForm(data);
+  }
+
+  function showAdminLogin() {
+    $('customer-view').classList.add('hidden');
+    $('admin-login-view').classList.remove('hidden');
+    $('login-status').textContent = '';
+  }
+  function cancelAdmin() {
+    $('admin-dashboard-view').classList.add('hidden');
+    $('admin-login-view').classList.add('hidden');
+    $('customer-view').classList.remove('hidden');
+    $('admin-pass').value = '';
+    google.script.run.withSuccessHandler(renderForm).withFailureHandler(showLoadError).getFormConfig();
+  }
+  function loginAdmin() {
+    const pass = $('admin-pass').value;
+    $('login-btn').disabled = true;
+    google.script.run
+      .withSuccessHandler(result => {
+        $('login-btn').disabled = false;
+        if (result) {
+          $('admin-login-view').classList.add('hidden');
+          $('admin-dashboard-view').classList.remove('hidden');
+          $('admin-pass').value = '';
+          renderAdminTable();
+        } else {
+          $('login-status').textContent = 'Incorrect password, or the administrator password has not been configured.';
+        }
+      })
+      .withFailureHandler(err => {
+        $('login-btn').disabled = false;
+        $('login-status').textContent = err && err.message ? err.message : 'Login failed.';
+      })
+      .verifyAdmin(pass);
+  }
+
+  function renderAdminTable() {
+    const tbody = $('admin-table-body');
+    tbody.replaceChildren();
+    formConfig.forEach((field, index) => {
+      const tr = document.createElement('tr');
+      const orderCell = document.createElement('td');
+      const orderNum = document.createElement('div');
+      orderNum.textContent = String(index + 1); orderNum.style.textAlign = 'center';
+      const controls = document.createElement('div'); controls.className = 'order-controls';
+      const up = document.createElement('button');
+      up.type = 'button'; up.className = 'btn-small'; up.textContent = '↑'; up.title = 'Move up';
+      up.disabled = index === 0; up.addEventListener('click', () => moveField(index, -1));
+      const down = document.createElement('button');
+      down.type = 'button'; down.className = 'btn-small'; down.textContent = '↓'; down.title = 'Move down';
+      down.disabled = index === formConfig.length - 1; down.addEventListener('click', () => moveField(index, 1));
+      controls.append(up, down); orderCell.append(orderNum, controls); tr.appendChild(orderCell);
+
+      tr.appendChild(makeTextCell(field.Section || '', 'section_' + index, 'field-section'));
+      tr.appendChild(makeTextCell(field.FieldID || '', 'id_' + index, 'field-id'));
+      tr.appendChild(makeTextCell(field.Label || '', 'label_' + index, 'field-label'));
+
+      const typeCell = document.createElement('td'), typeSelect = document.createElement('select');
+      typeSelect.id = 'type_' + index;
+      [['text','Text'],['number','Number'],['email','Email'],['select','Dropdown'],['checkbox','Checkbox']].forEach(([value, label]) => {
+        const opt = document.createElement('option'); opt.value = value; opt.textContent = label;
+        if ((field.Type || 'text') === value) opt.selected = true;
+        typeSelect.appendChild(opt);
+      });
+      typeCell.appendChild(typeSelect); tr.appendChild(typeCell);
+      tr.appendChild(makeTextCell(field.Options || '', 'options_' + index, 'field-options'));
+
+      const reqCell = document.createElement('td'), req = document.createElement('input');
+      req.type = 'checkbox'; req.id = 'req_' + index; req.checked = truthy(field.Required);
+      reqCell.appendChild(req); tr.appendChild(reqCell);
+      const hiddenCell = document.createElement('td'), hidden = document.createElement('input');
+      hidden.type = 'checkbox'; hidden.id = 'hidden_' + index; hidden.checked = truthy(field.Hidden);
+      hiddenCell.appendChild(hidden); tr.appendChild(hiddenCell);
+
+      const actionCell = document.createElement('td'), del = document.createElement('button');
+      del.type = 'button'; del.className = 'btn-small btn-delete'; del.textContent = 'Delete';
+      del.addEventListener('click', () => deleteField(index));
+      actionCell.appendChild(del); tr.appendChild(actionCell);
+      tbody.appendChild(tr);
+    });
+  }
+
+  function makeTextCell(value, id, className) {
+    const td = document.createElement('td'), input = document.createElement('input');
+    input.type = 'text'; input.id = id; input.value = value;
+    if (className) input.className = className;
+    td.appendChild(input); return td;
+  }
+
+  function syncAdminTableToConfig() {
+    formConfig.forEach((field, index) => {
+      const section = $('section_' + index), id = $('id_' + index), label = $('label_' + index);
+      const type = $('type_' + index), options = $('options_' + index);
+      const req = $('req_' + index), hidden = $('hidden_' + index);
+      if (section) field.Section = section.value.trim() || 'General';
+      if (id) field.FieldID = id.value.trim();
+      if (label) field.Label = label.value.trim();
+      if (type) field.Type = type.value;
+      if (options) field.Options = options.value.trim();
+      if (req) field.Required = req.checked;
+      if (hidden) field.Hidden = hidden.checked;
+    });
+  }
+
+  function moveField(index, direction) {
+    syncAdminTableToConfig();
+    const target = index + direction;
+    if (target < 0 || target >= formConfig.length) return;
+    const item = formConfig.splice(index, 1)[0];
+    formConfig.splice(target, 0, item);
+    renderAdminTable();
+  }
+
+  function addField() {
+    syncAdminTableToConfig();
+    const section = $('new_section').value.trim() || 'New Section';
+    const id = $('new_id').value.trim().toLowerCase().replace(/\s+/g, '_');
+    const label = $('new_label').value.trim();
+    const type = $('new_type').value;
+    const options = $('new_options').value.trim();
+    const required = $('new_required').checked;
+    if (!/^[a-zA-Z][a-zA-Z0-9_-]{0,59}$/.test(id) || !label) {
+      alert('Enter a valid Field ID (start with a letter; use letters, numbers, _ or -) and a Display Label.'); return;
+    }
+    if (formConfig.some(f => String(f.FieldID).toLowerCase() === id.toLowerCase())) {
+      alert('That Field ID already exists. Please use a unique ID.'); return;
+    }
+    if (type === 'select' && !options) { alert('Enter comma-separated options for a dropdown field.'); return; }
+    formConfig.push({FieldID:id, Section:section, Label:label, Type:type, Required:required, Options:options, Hidden:false});
+    $('new_id').value = ''; $('new_label').value = ''; $('new_options').value = ''; $('new_required').checked = false;
+    renderAdminTable();
+  }
+
+  function deleteField(index) {
+    syncAdminTableToConfig();
+    const name = formConfig[index] ? formConfig[index].Label : 'this field';
+    if (confirm('Delete "' + name + '" from the form configuration? Existing responses will remain in the Responses sheet.')) {
+      formConfig.splice(index, 1); renderAdminTable();
+    }
+  }
+
+  function saveAdminChanges() {
+    syncAdminTableToConfig();
+    const seen = new Set();
+    for (const field of formConfig) {
+      if (!field.FieldID || !field.Label) { alert('Every field needs a Field ID and Display Label.'); return; }
+      if (!/^[a-zA-Z][a-zA-Z0-9_-]{0,59}$/.test(field.FieldID)) { alert('Invalid Field ID: ' + field.FieldID); return; }
+      const normalized = field.FieldID.toLowerCase();
+      if (seen.has(normalized)) { alert('Duplicate Field ID: ' + field.FieldID); return; }
+      seen.add(normalized);
+      if (field.Type === 'select' && !String(field.Options || '').trim()) {
+        alert('Dropdown field "' + field.Label + '" needs comma-separated options.'); return;
+      }
+    }
+    const button = $('save-btn');
+    button.disabled = true; button.textContent = 'Saving to Google Sheets...';
+    $('admin-status').textContent = '';
+    google.script.run
+      .withSuccessHandler(message => {
+        $('admin-status').textContent = message || 'Saved successfully.';
+        $('admin-status').className = 'status success';
+        button.disabled = false; button.textContent = 'Save All Changes to Database';
+        google.script.run
+          .withSuccessHandler(config => { formConfig = config; renderAdminTable(); renderForm(config); })
+          .withFailureHandler(err => {
+            $('admin-status').textContent = 'Saved, but reload failed: ' + (err && err.message ? err.message : 'Unknown error');
+            $('admin-status').className = 'status error';
+          }).getFormConfig();
+      })
+      .withFailureHandler(err => {
+        $('admin-status').textContent = err && err.message ? err.message : 'Could not save changes.';
+        $('admin-status').className = 'status error';
+        button.disabled = false; button.textContent = 'Save All Changes to Database';
+      }).updateConfig(formConfig);
+  }
 </script>
 </body>
 </html>
